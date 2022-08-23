@@ -1,0 +1,400 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1.3333333in]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\usepackage{quiver}
+\setlength{\parindent}{0pt}
+
+\raggedbottom
+\pagestyle{fancy}
+\lhead{}
+\chead{200C Assignment 1}
+\rhead{}
+\cfoot{\thepage}
+
+\newenvironment{solution}
+{\renewcommand\qedsymbol{}\begin{proof}[Solution]}
+{\end{proof}}
+
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\mf}{\mathfrak}
+\newcommand{\from}{\colon}
+\newcommand{\sseq}{\subseteq}
+\newcommand{\brn}{\mathbb R^n}
+\newcommand{\bRn}{\mathbb R^n}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\ol}{\overline}
+\newcommand{\wt}{\widetilde}
+\newcommand{\Gal}{\mathrm{Gal}}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\MaxSpec}{MaxSpec}
+\newcommand{\lsim}{{{\sim}}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\bN}{\mathbb{N}}
+\renewcommand{\include}{\hookrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bC}{\mathbb{C}}
+\renewcommand{\c}{\mathbf{c}}
+\newcommand{\vare}{\varepsilon}
+\newcommand{\sign}{\mathrm{sign}\,}
+\newcommand{\1}{\mbf 1}
+\renewcommand{\mod}{\ \mathrm{mod}\ }
+\newcommand{\2}{\mbf 2}
+\newcommand{\3}{\mbf 3}
+\renewcommand{\v}{\mbf{v}}
+\newcommand{\w}{\mbf{w}}
+\renewcommand{\u}{\mbf{u}}
+\newcommand{\4}{\mbf 4}
+\newcommand{\5}{\mbf 5}
+\newcommand{\frp}{\mathrm{Frob}_p}
+\newcommand{\6}{\mbf 6}
+\newcommand{\7}{\mbf 7}
+\newcommand{\8}{\mbf 8}
+\newcommand{\9}{\mbf 9}
+\newcommand{\0}{\mbf 0}
+\renewcommand{\i}{\mbf i}
+\DeclareMathOperator*{\im}{\mathrm{im}}
+\renewcommand{\j}{\mbf j}
+\renewcommand{\k}{\mbf k}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\newcommand\defeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+\newcommand{\phantomreplace}[2]{\makebox[0pt][l]{#1}\hphantom{#2}}
+\newcommand{\phantommathreplace}[2]{\makebox[0pt][l]{$\displaystyle #1$}\hphantom{#2}}
+\makeatletter
+\newcommand{\skipitems}[1]{%
+  \addtocounter{\@enumctr}{#1}%
+}
+\makeatother
+
+\begin{document}
+
+\begin{enumerate}[label=(\arabic*)]
+    \item Let $f:A\to B$ be a ring homomorphism and let $S\sseq A$ be a multiplicative subset. Define $T=f(S)$. Let $M$ be a $B$-module. Construct an $S^{-1}A$ linear isomorphism between $S^{-1}M$ (where $M$ is considered an $A$-module via $f$) and $T^{-1}B$ (considered an $S^{-1}A$-module via the map $S^{-1}A\to T^{-1}B$ given by $a/s\mapsto f(a)/f(s)$)
+    \begin{solution}
+        Define $\Phi:S^{-1}M\to T^{-1}M$ by $m/s\mapsto m/f(s)$. 
+        
+        First, we show this map is well-defined. Suppose $m/s$ and $m'/s'$ are equivalent elements of $S^{-1}M$, so that there exists some $x\in S$ such that
+        \[x\cdot(s'\cdot m-s\cdot m')=f(x)(f(s')m-f(s)m')=0.\]
+        The right-hand equality gives that the fractions $\Phi(m/s)=m/f(s)$ and $\Phi(m'/s')=m'/f(s')$ are equivalent in $T^{-1}M$ via the element $f(x)\in T$.
+
+        Next, we show that $\Phi$ is $S^{-1}A$-linear. Indeed, given $m/s,m'/s'\in S^{-1}M$ and $a/x\in S^{-1}A$, we have that:
+        \begin{align*}
+            \Phi(m/s+m'/s')&=\Phi\(\frac{s'\cdot m+s\cdot m'}{ss'}\) \\
+            &=\Phi\(\frac{f(s')m+f(s)m'}{ss'}\) \\
+            &=\frac{f(s')m+f(s)m'}{f(ss')} \\
+            &=\frac{f(s')m+f(s)m'}{f(s)f(s')} \\
+            &=\frac m{f(s)}+\frac{m'}{f(s')} \\
+            &=\Phi(m/s)+\Phi(m'/s'),
+        \end{align*}
+        and
+        \[\Phi\(\frac ax\cdot\frac ms\)=\Phi\(\frac{f(a)m}{xs}\)=\frac{f(a)m}{f(xs)}=\frac{f(a)m}{f(x)f(s)}=\frac ax\cdot\frac m{f(s)}=\frac ax\cdot\Phi\(\frac ms\).\]
+
+        Next, we show that $\Phi$ is injective. Suppose $\Phi(m/s)=\Phi(m'/s')$. Then there exists $f(x)\in T$ such that
+        \[x\cdot (f(s')m-f(s)m')=f(x)(f(s')m-f(s)m')=x\cdot(s'\cdot m-s\cdot m')=0,\]
+        so that $s/m$ must have been equal to $s'/m'$ in the first place.
+
+        Finally, we show that $\Phi$ is surjective. Let $m/f(s)$ in $T^{-1}M$. Then clearly we have that $\Phi(m/s)=m/f(s)$.
+    \end{solution}
+
+    \item Let $M$ be an $A$-module. Define the \textbf{support} of $M$ to be
+    \[\Supp M:=\{\mf p\in\Spec A\mid M_{\mf p}\neq 0\}.\]
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that $\Supp M\sseq V(\Ann M)$ (recall that $\Ann M:=\{x\in A\mid xm=0\text{ for all }m\in M\}$ and here we use the notation from \S 1.4), and that equality holds if $M$ is finitely generated.
+        \begin{proof}
+            In order to show $\Supp M\sseq V(\Ann M)$, it suffices to show that for any prime ideal $\mf p\in\Spec A$ such that $M_{\mf p}\neq0$, $\Ann M\sseq\mf p$. It further suffices to show the contrapositive, namely, that if $\Ann M\not\sseq\mf p$, then $M_{\mf p}=0$. Indeed, given such a $\mf p$, we have that there exists $x\in \Ann M\cap(A-\mf p)$, so that given any $m/s$ in $M_{\mf p}$, we have that $m/s=0/1$, as
+            \[x(1m-s0)=xm=0,\]
+            so that indeed $M_{\mf p}=0$.
+
+            Now, we assume that $M$ is finitely generated and show the converse, namely, that if $M_{\mf p}=0$ then $\Ann M\not\sseq\mf p$. Let $m_1,\ldots,m_n$ generate $M$. Then since $M_{\mf p}=0$, $m_i/1=0/1$ for each $i=1,\ldots,n$, so that for each $i$ there exists $x_i\in A-\mf p$ such that
+            \[x_i(1m_i-1\cdot 0)=x_im_i=0.\]
+            Then since $A-\mf p$ is multiplicatively closed, we have that $x:=x_1\cdots x_n\in A-\mf p$. Clearly $xm_i=0$ for all $i$. Furthermore, $x\in\Ann M$, as given any $m\in M$, we have that
+            \[m=\sum_{i=1}^na_im_i\]
+            for some $a_1,\ldots,a_n\in A$, so that
+            \[xm=\sum_{i-1}^na_ixm_i=\sum_{i=1}^na_i0=0.\qedhere\]
+        \end{proof}
+        \item Let $N$ be another $A$-module. Show that $\Supp(M\otimes_A N)\sseq \Supp M\cap\Supp N$, and that equality holds if $M$ and $N$ are finitely generated (Exercise 2.3 of Atiyah-Macdonald may be helpful here).
+        \begin{proof}
+            In order to show $\Supp(M\otimes_A N)\sseq\Supp M\cap\Supp N$, it suffices to show that if $\mf p\in\Spec A$ then $(M\otimes_A N)_{\mf p}\neq 0\implies M_{\mf p}\neq 0\text{ and }N_{\mf p}\neq 0$. It further suffices to show the contrapositive, namely, that $M_{\mf p}=0\text{ or }N_{\mf p}=0\implies(M\otimes_A N)_{\mf p}=0$. Indeed, this follows by Proposition 2.2.5, which gives that $(M\otimes_A N)_{\mf p}=M_{\mf p}\otimes_{A_{\mf p}}N_{\mf p}$.
+
+            Now, suppose that $M$ and $N$ are finitely generated. We wish to show that if $(M\otimes_A N)_{\mf p}=M_{\mf p}\otimes_{A_{\mf p}}N_{\mf p}$ is zero, then at least one of $M_{\mf p}$ or $N_{\mf p}$ are. This follows by A\&M Exercise 2.3, as $A_{\mf p}$ is a local ring.
+        \end{proof}
+    \end{enumerate}
+
+    \item Let $M$ be an $A$-module and let $S\subset A$ be a multiplicative set. Show that the natural $M\to S^{-1}M$ given by $m\mapsto m/1$ is a bijection if and only if, for all $x\in S$, the multiplication map $m\mapsto xm$ is an isomorphism of $M$.
+    \begin{proof}
+        Let $\varphi:M\to S^{-1}M$ denote the canonical map and let $t_x: M\to M$ denote the multiplication-by-$x$ map.
+
+        First, suppose that $\varphi$ is a bijection. Let $x\in S$. Then first we claim $t_x$ is injective. It suffices to show that $\ker t_x=0$. Suppose for the sake of a contradiction that there existed some nonzero $m\in M$ such that $xm=0$. Then we have
+        \[x(1m-1\cdot 0)=0,\]
+        so that $\varphi(m)=m/1=0/1=\varphi(0)$ in $S^{-1}M$, a contradiction of the fact that $\varphi$ is a bijection.
+
+        Next, we claim that $t_x$ is surjective. Let $m\in M$. Since $\varphi$ is surjective, there exists $n$ in $M$ such that $m/x=\varphi(n)=n/1$. In particular, this means there exists some $y\in S$ such that
+        \[y(1m-xn)=t_y(1m-xn)=0\implies 1m-xn=0\implies m=xn=t_x(n),\]
+        where the first implication follows by the fact that $t_y$ is injective. Therefore $m$ is indeed in the image of $t_x$, $t_x$ is surjective.
+
+        Conversely, suppose that $t_x$ is an isomorphism for all $x\in S$. First, we show $\varphi$ is surjective. Let $m/s$ in $S^{-1}M$. Since $t_s$ is a bijection, there exists $n\in M$ such that $t_s(n)=sn=m$. Then we have $m/s=n/1=\varphi(n)$, as
+        \[1(m-sn)=1\cdot 0=0.\]
+        Hence, indeed $\varphi$ is surjective.
+
+        Finally, we show that $\varphi$ is injective. Let $n,m\in M$ such that $\varphi(n)=\varphi(m)$, so that there exists $x\in S$ such that
+        \[x(n-m)=0\implies xn=xm\implies t_x(n)=t_x(m)\implies n=m,\]
+        where the last implication follows as $t_x$ is injective.
+    \end{proof}
+
+    \item Let $A$ be a ring and let $0\to X\to Y\to Z\to 0$ be a chain complex of $A$-modules. Show that the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item $0\to X\to Y\to Z\to0$ is exact.
+        \item $0\to X_{\mf p}\to Y_{\mf p}\to Z_{\mf p}\to 0$ is exact for all prime ideals $\mf p\leq A$.
+        \item $0\to X_{\mf m}\to Y_{\mf m}\to Z_{\mf m}\to 0$ is exact for all maximal ideals $\mf m\leq A$.
+    \end{enumerate}
+    \begin{proof}
+        (a) implies (b) by Proposition 2.2.1. Clearly (b) implies (c), as every maximal ideal is prime. It therefore suffices to show that (c) implies (a). 
+        
+        First, we show that given a $A$-linear map $f:M\to N$ between $A$-modules, that $\ker f_{\mf p}=(\ker f)_{\mf p}$ and $\im f_{\mf p}=(\im f)_{\mf p}$ for all prime ideals $\mf p\leq A$. Indeed, we have that
+        \[0\to\ker f\into M\xrightarrow[]{f}N\]
+        is an exact sequence, so that
+        \[0\to(\ker f)_{\mf p}\into M_{\mf p}\xrightarrow[]{f_{\mf p}} N_{\mf p}\]
+        is likewise exact, giving that $\ker f_{\mf p}=(\ker f)_{\mf p}$. Similarly, exactness of
+        \[M\xrightarrow[]{f}N\xrightarrow[]{\pi}\coker f\to 0\]
+        (so that $\ker\pi=\im f$) gives that
+        \[M_{\mf p}\xrightarrow[]{f_{\mf p}} N_{\mf p}\xrightarrow[]{\pi_{\mf p}}(\coker f)_{\mf p}\to 0\]
+        is exact, so that $\im f_{\mf p}=\ker \pi_{\mf p}=(\ker \pi)_{\mf p}=(\im f)_{\mf p}$.
+
+        Now, suppose that that we have a sequence
+        \begin{equation}\label{eq:1}
+            X\xrightarrow[]{g}Y\xrightarrow[]{f}Z
+        \end{equation}
+        such that 
+        \[X_{\mf m}\xrightarrow[]{g_{\mf m}}Y_{\mf m}\xrightarrow[]{f_{\mf m}}Z_{\mf m}\]
+        is exact for all maximal ideals $\mf m\leq A$. Then we have
+        \[\frac{\ker f_{\mf m}}{\im g_{\mf m}}=\frac{(\ker f)_{\mf m}}{(\im g)_{\mf m}}\overset{(\ast)}\cong\(\frac{\ker f}{\im g}\)_{\mf m}=0\]
+        for all maximal ideals $\mf m\leq A$, where $(\ast)$ follows by Corollary 2.2.2(3). Thus by Proposition 2.3.1(3), we have that $\ker f/\im g=0$, so that indeed the sequence in Equation \ref{eq:1} is exact.
+    \end{proof}
+
+    \item Let $M$ be an $A$-module. Suppose that for each maximal ideal $\mf m$ of $A$, there exists $f\notin \mf m$ such that $M_f$ is a finitely generated $A_f$-module. Pick one such element with this property and call it $f_{\mf m}$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that there is a finite subset $\{f_1,\ldots,f_r\}$ of $\{f_{\mf m}\}$ that generates the unit ideal.
+        \begin{proof}
+            Let $I$ denote the ideal generated by the $f_{\mf m}$ for all $\mf m\in\MaxSpec A$. Then $I$ is not contained in any maximal ideal $\mf m$, as $f_{\mf m}\in I-\mf m$. Hence, $I$ is necessarily the unit ideal, so that $1\in I$. The desired result follows.
+        \end{proof}
+        \item Use the generators for $M_{f_1},\ldots,M_{f_r}$ to get a finite generating set for $M$.
+        \begin{proof}
+            Let $m_{i,1}/f_i^{e_{i,1}},m_{i,2}/f_i^{e_{i,2}},\ldots,m_{i,n}/f_i^{e_{i,n}}$ generate $M_i$. We claim
+            \[\{m_{i,j}\mid 1\leq i\leq r,1\leq j\leq n\}\]
+            generates $M$. 
+            
+            Let $x\in M$. For $i=1,\ldots,r$, since $M_{f_i}$ is finitely generated as an $A_{f_i}$-module, there exists ${a_{i,j}}/f_i^{k_{i,j}}\in A_{f_i}$ for $j=1,\ldots,n$ such that
+            \[
+                \frac x1=\sum_{j=1}^n\frac{a_{i,j}}{f_i^{k_{i,j}}}\cdot\frac{m_{i,j}}{f_i^{e_{i,j}}}
+                %=
+                %\sum_{j=1}^n\frac{a_{i,j}m_{i,j}}{f_i^{k_{i,j}+e_{i,j}}}=\frac{\sum_{j=1}^n\(a_{i,j}m_{i,j}\prod\)}{f_i^{\sum_{j=1}^n(k_{i,j}+e_{i,j})}}
+                %=\frac{\sum_{j=1}^na_{i,j}\cdot m_{i,j}}{f_i^{\sum_{j=1}^n(k_{i,j}+e_{i,j})}}
+            \]
+            so that for $i=1,\ldots,r$ there exists $\ell_i\in\bN$ and $A_{i,j}\in A$ for $j=1,\ldots,n$ such that
+            \[f_i^{\ell_i}x=\sum_{j=1}^nA_{i,j}m_{i,j}.\]
+            Then because there exists $b_1,\ldots,b_r\in A$ such that
+            \[\sum_{i=1}^rb_if_i=1,\]
+            so we have that
+            \[x=x\(\sum_{i=1}^rb_if_i\)^{\ell_1+\cdots+\ell_r}\]
+            can be written as an $A$-linear combination of $m_{i,j}$'s.
+        \end{proof}
+    \end{enumerate}
+
+    \item Let $A$ be a ring with multiplicative set $S\subset A$. Let $M,N$ be $A$-modules and assume that $M$ is finitely presented. Construct an $S^{-1}A$-linear isomorphism between $\Hom_{S^{-1}A}(S^{-1}M,S^{-1}N)$ and $S^{-1}\Hom_A(M,N)$.
+    \begin{proof}
+        Fix an $A$-module $N$. Given an $A$-module $M$, define
+        \begin{align*}
+            \Phi_M:S^{-1}\Hom_A(M,N)&\to\Hom_{S^{-1}A}(S^{-1}M,S^{-1}N) \\
+            \frac fs&\mapsto\( \frac mt\mapsto \frac{f(m)}{st}\).
+        \end{align*}
+        First, we show that given $f/s\in S^{-1}\Hom_A(M,N)$ that $\Phi_M(f/s)$ is a well-defined $S^{-1}A$-linear map. First, well-definedness. Suppose $m/t=m'/t'$, so that there exists $x\in S$ with
+        \[xt'm=xtm'.\]
+        Then we have by $A$-linearity of $f$ that
+        \[x(stf(m')-st'f(m))=sf(xtm'-xt'm)=sf(0)=0,\]
+        so that indeed
+        \[\Phi_M\(\frac fs\)\(\frac mt\)=\frac{f(m)}{st}=\frac{f(m')}{st'}=\Phi_M\(\frac fs\)\(\frac{m'}{t'}\).\]
+        Next, we show that $\Phi_M(f/s)$ is $S^{-1}A$-linear. Let $m,m'\in M$, $s',t,t'\in S$, and $a\in A$. Then
+        \begin{align*}
+            \Phi_M\(\frac fs\)\(\frac mt+\frac a{s'}\cdot\frac{m'}{t'}\)&=\Phi_M\(\frac fs\)\(\frac{s't'm+atm'}{tt's'}\) \\
+            &=\frac{f(s't'm+atm')}{tt'ss'} \\
+            &=\frac{s't'f(m)}{tt'ss'}+\frac{atf(m')}{tt'ss'} \\
+            &=\frac{f(m)}{st}+\frac a{s'}\cdot\frac{f(m')}{st'} \\
+            &=\Phi_M\(\frac fs\)\(\frac mt\)+\frac a{s'}\cdot\Phi_M\(\frac fs\)\(\frac{m'}{t'}\).
+        \end{align*}
+        Next, we show that $\Phi_M$ itself is $S^{-1}A$-linear. Let $f,g\in\Hom_A(M,N)$, $s,s',t,t'\in S$, and $a\in A$. Then given any $m/t'\in S^{-1}M$, we have:
+        \begin{align*}
+            \Phi_M\(\frac fs+\frac at\cdot\frac g{s'}\)\(\frac m{t'}\)&=\Phi_M\(\frac{s'tf+asg}{ss't}\)\(\frac m{t'}\) \\
+            &=\frac{s'tf(m)+asg(m)}{ss'tt'} \\
+            &=\frac{f(m)}{st'}+\frac{a}{t}\cdot\frac{g(m)}{s't'} \\
+            &=\Phi_M\(\frac fs\)\(\frac m{t'}\)+\frac at\cdot\Phi_M\(\frac g{s'}\)\(\frac m{t'}\).
+        \end{align*}
+        Therefore, indeed $\Phi_M$ is a well-defined $S^{-1}A$-linear map. Finally, we claim that $\Phi_M$ is natural in $M$. Let $\varphi:L\to M$ be an $A$-linear map. Then we claim the following diagram commutes:
+        \[\begin{tikzcd}
+            {S^{-1}\Hom_A(M,N)} &&&& {S^{-1}\Hom_A(L,N)} \\
+            {\Hom_{S^{-1}A}(S^{-1}M,S^{-1}N)} &&&& {\Hom_{S^{-1}A}(S^{-1}L,S^{-1}N)}
+            \arrow["{\Phi_M}"', from=1-1, to=2-1]
+            \arrow["{\Hom_{S^{-1}A}(S^{-1}\varphi,S^{-1}N)}"', from=2-1, to=2-5]
+            \arrow["{S^{-1}\Hom(\varphi,N)}", from=1-1, to=1-5]
+            \arrow["{\Phi_L}", from=1-5, to=2-5]
+        \end{tikzcd}\]
+        Indeed, chasing an element $f/s$ around the diagram yields
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXGRpc3BsYXlzdHlsZVxcZnJhYyBmcyJdLFs0LDAsIlxcZGlzcGxheXN0eWxlXFxmcmFje2ZcXGNpcmNcXHZhcnBoaX1zIl0sWzQsMSwiXFxkaXNwbGF5c3R5bGVcXGxlZnQoXFxmcmFjXFxlbGwgdFxcbWFwc3RvXFxmcmFje2YoXFx2YXJwaGkobSkpfXtzdH1cXHJpZ2h0KSJdLFswLDEsIlxcZGlzcGxheXN0eWxlXFxsZWZ0KFxcZnJhYyBtdFxcbWFwc3RvXFxmcmFje2YobSl9e3N0fVxccmlnaHQpIl0sWzAsMSwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsxLDIsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMCwzLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzMsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+        \[\begin{tikzcd}
+            {\displaystyle\frac fs} &&&& {\displaystyle\frac{f\circ\varphi}s} \\
+            {\displaystyle\left(\frac mt\mapsto\frac{f(m)}{st}\right)} &&&& {\displaystyle\left(\frac\ell t\mapsto\frac{f(\varphi(m))}{st}\right)}.
+            \arrow[maps to, from=1-1, to=1-5]
+            \arrow[maps to, from=1-5, to=2-5]
+            \arrow[maps to, from=1-1, to=2-1]
+            \arrow[maps to, from=2-1, to=2-5]
+        \end{tikzcd}\]
+        It remains to show that if $M$ is finitely presented then $\Phi_M$ is an isomorphism. If $M$ is finitely presented, there exists a finite free presentation
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCIwIl0sWzEsMCwiRiJdLFsyLDAsIkciXSxbMywwLCJNLiJdLFswLDFdLFsxLDIsIlxcYWxwaGEiXSxbMiwzLCJcXGJldGEiXV0=
+        \[\begin{tikzcd}
+            F & G & {M} & 0.
+            \arrow["\alpha", from=1-1, to=1-2]
+            \arrow["\beta", from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+        \end{tikzcd}\]
+        We can apply the natural transformation $\Phi$ to this diagram, and since $S^{-1}\Hom_A(-,N)$ and $\Hom_{S^{-1}A}(S^{-1}-,N)$ are left-exact contravariant functors (since $S^{-1}-$ and $\Hom(-,N)$ are left-exact), each row in the following diagram is exact.
+        \[\begin{tikzcd}
+            0 & {S^{-1}\Hom_A(M,N)} & {S^{-1}\Hom_A(G,N)} & {S^{-1}\Hom_A(F,N)} \\
+            0 & {\Hom_{S^{-1}A}(S^{-1}M,S^{-1}N)} & {\Hom_{S^{-1}A}(S^{-1}G,S^{-1}N)} & {\Hom_{S^{-1}A}(S^{-1}F,S^{-1}N)}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow["{\Phi_F}", from=1-4, to=2-4]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=2-3, to=2-4]
+            \arrow["{\Phi_M}", from=1-2, to=2-2]
+            \arrow["{\Phi_G}", from=1-3, to=2-3]
+        \end{tikzcd}\]
+        By naturality of $\Phi$, this diagram commutes. Hence, in order to show that $\Phi_M$ is an isomorpism, by the five lemma it suffices to show that $\Phi_G$ and $\Phi_F$ are. This follows by the fact that $F$ and $G$ are free $A$-modules and the fact that the following diagram commutes for all $n\in\bN$ (I have ommited the check that this diagram commutes, as well as the explicit descriptions of the isomorphisms involved, it is straightforward to check).
+        \[\begin{tikzcd}
+            {S^{-1}\Hom_A(A^{\oplus n},N)} && {\Hom_{S^{-1}A}(S^{-1}A^{\oplus n},S^{-1}N)} \\
+            {S^{-1}\left(\left(\Hom_A(A,N)\right)^{\oplus n}\right)} && {\Hom_{S^{-1}A}((S^{-1}A)^{\oplus n},S^{-1}N)} \\
+            {S^{-1}(N^{\oplus n})} && {\left(\Hom_{S^{-1}A}(S^{-1}A,S^{-1}N\right)^{\oplus n}} \\
+            {(S^{-1}N)^{\oplus n}} && {(S^{-1}N)^{\oplus n}}
+            \arrow["{\Phi_{A^{\oplus n}}}", from=1-1, to=1-3]
+            \arrow["\cong", from=1-3, to=2-3]
+            \arrow["\cong", from=2-3, to=3-3]
+            \arrow[Rightarrow, no head, from=4-1, to=4-3]
+            \arrow["\cong", from=3-3, to=4-3]
+            \arrow["\cong"', from=1-1, to=2-1]
+            \arrow["\cong"', from=2-1, to=3-1]
+            \arrow["\cong"', from=3-1, to=4-1]
+        \end{tikzcd}\]
+        Hence, $\Phi_G$ and $\Phi_F$ must be isomorphisms, so that $\Phi_M$ is as well.
+    \end{proof}
+
+    \item (Atiyah-Macdonald, Exercise 3.12) Let $A$ be an integral domain and $M$ an $A$-module. An element $x\in M$ is a \textit{torsion element} of $M$ if $\Ann(x)\neq0$, that is if $x$ is killed by some nonzero element of $A$. Show that the torsion elements of $M$ form a submodule of $M$.
+    \begin{proof}
+        Let $m,m'\in M$ be torsion elements of $M$ annihilated by $x,x'\in A$, respectively. Then
+        \[xx'(m+m')=x'(xm)+x(x'm')=x'0+x0=0.\]
+        Similarly, given $a\in A$, we have
+        \[x(am)=a(xm)=a0=0.\qedhere\]
+    \end{proof}
+    This submodule is called the \textit{torsion submodule} of $M$ and is denoted by $T(M)$. If $T(M)=0$, the module $M$ is said to be torsion-free. Show that
+    \begin{enumerate}[label={\roman*)}]
+        \item If $M$ is any $A$-module, then $M/T(M)$ is torsion-free.
+        \begin{proof}
+            Let $\ol m\in M/T(M)$ such that there exists some nonzero $a\in\Ann(\ol m)$. Then
+            \begin{align*}
+            a\ol m=\ol0&\implies \ol{am}=\ol0 \\
+            &\implies am\in T(M)\\ 
+            &\implies\exists b\in A\mid bam=0 \\
+            &\implies m\in T(M) \\
+            &\implies\ol m=\ol0,
+            \end{align*}
+            so that indeed $T(M/T(M))=\ol0$.
+        \end{proof}
+        \item If $f:M\to N$ is a module homomorphism, then $f(T(M))\sseq T(N)$.
+        \begin{proof}
+            Let $m\in T(M)$, so that there exists nonzero $a\in A$ with $am=0$. Then
+            \[af(m)=f(am)=f(0)=0,\]
+            so that $f(m)\in T(N)$.
+        \end{proof}
+        \item If $0\to M'\to M\to M''$ is an exact sequence, then the sequence $0\to T(M')\to T(M)\to T(M'')$ is exact.
+        \begin{proof}
+            Label the sequence like so
+            \[\begin{tikzcd}
+                0 & {M'} & M & {M''.}
+                \arrow[from=1-1, to=1-2]
+                \arrow["f", from=1-2, to=1-3]
+                \arrow["g", from=1-3, to=1-4]
+            \end{tikzcd}\]
+            We wish to show the following sequence is exact
+            \[\begin{tikzcd}
+                0 & {T(M')} & {T(M)} & {T(M'').}
+                \arrow[from=1-1, to=1-2]
+                \arrow["{T(f)}", from=1-2, to=1-3]
+                \arrow["{T(g)}", from=1-3, to=1-4]
+            \end{tikzcd}\]
+            Before showing this sequence is exact, note the following useful properties: Let $\varphi:P\to Q$ be an $A$-linear map. Then $\ker T(\varphi)=\ker\varphi\cap T(P)$ and $\im T(\varphi)= \varphi(T(P))$. 
+
+            Now, we show the above sequence is exact. First, we know it is exact at $T(M')$ as
+            \[\ker T(f)=\ker f\cap T(M')=0\cap T(M')=0,\]
+            so that $T(f)$ is indeed a monomorphism. Since $g\circ f=0$, clearly $T(g)\circ T(f)=0$, as $T(g)(T(f)(x))=g(f(x))$ for all $x\in T(M')$, so that $\im T(f)\sseq\ker T(g)$. Finally, we have that:
+            \[\ker T(g)=\ker g\cap T(M)=\im f\cap T(M)\supseteq \im T(f).\qedhere\]
+        \end{proof}
+        \item If $M$ is any $A$-module, then $T(M)$ is the kernel of the mapping $x\mapsto 1\otimes x$ of $M$ into $K\otimes_A M$, where $K$ is the field of fractions of $A$.
+        \begin{proof}
+            Let $S:=A-\{0\}$, then $K=S^{-1}A$ so that $K\otimes_AM\cong S^{-1}M$ via the map $a/s\otimes m\mapsto am/s$ (Proposition 2.2.3). It follows that it suffices to show that $T(M)$ is the kernel of the canonical map $\varphi:M\to S^{-1}M$. Indeed, we have that
+            \begin{align*}
+                m\in T(M)&\iff \exists a\in\Ann(M)-0 \\
+                &\iff\exists a\in S\text{\ \ s.t.\ \ } am=0 \\
+                &\iff\exists a\in S\text{\ \ s.t.\ \ } a(1\cdot m-1\cdot 0)=0 \\
+                &\iff \frac m1=\frac 01 \\
+                &\iff m\in\ker\varphi,
+            \end{align*}
+            so indeed $\ker\varphi=T(M)$.
+        \end{proof}
+    \end{enumerate}
+
+    \item (Atiyah-Macdonald, Exercise 3.13) Let $S$ be a multiplicatively closed subset of an integral domain $A$. In the notation of Exercise 12, show that $T(S^{-1}M)=S^{-1}(TM)$. 
+    \begin{proof}
+        First, suppose that $m/s\in T(S^{-1}M)$, so that $s\in S$ and there exists some nonzero $a\in A$ such that $a(m/s)=0$. In particular, this means that there exists some $t\in S$ with $t(1\cdot am-s\cdot 0)=0$, i.e.\ $(ta)m=0$, so that $m\in T(M)$, giving that $m/s\in S^{-1}(TM)$.
+
+        Conversely, suppose that $m/s\in S^{-1}(TM)$, so that $m\in T(M)$ and $s\in S$. Then because $m\in T(M)$, there exists some nonzero $a\in A$ with $am=0$. In particular, this gives that $1(am-0s)=0$, and $1\in S$, so that necessarily $a(m/s)=0$, meaning $m/s\in T(S^{-1}M)$.
+        %\begin{align*}
+            %m/s\in T(S^{-1}M)&\iff\exists a\in A-\{0\}\text{\ \ s.t.\ \ } \frac{am}s=\frac01 \\
+            %&\iff\exists a\in A-\{0\},\ \exists t\in S\text{\ \ s.t.\ \ }t(1\cdot am-s\cdot 0)=0 \\
+            %&\iff
+        %\end{align*}
+        %We have that $m/s\in T(S^{-1}M)$ if and only if there exists nonzero $a\in A$ with $a(m/s)=0$. Similarly, $m/s\in S^{-1}(TM)$ if and only if there exists $m\in T(M)$. 
+        %Let $U:=A-\{0\}$. We know that $T(M)$ is the kernel of the canonical map $\varphi:M\to U^{-1}M$ by the previous problem, so that  $S^{-1}(TM)$ is the kernel of the map $S^{-1}\varphi:S^{-1}M\to S^{-1}(U^{-1}M)$, as localization is exact. Furthermore, we know that 
+    \end{proof}
+    Deduce that the following are equivalent
+    \begin{enumerate}[label=\roman*)]
+        \item $M$ is torsion-free.
+        \item $M_{\mf p}$ is torsion-free for all prime ideals $\mf p$.
+        \item $M_{\mf m}$ is torsion-free for all maximal ideals $\mf m$. 
+    \end{enumerate}
+    First, we show (i) implies (ii). Given a prime ideal $\mf p\leq A$, since $M$ is torsion free, we have that $0=0_{\mf p}=(TM)_{\mf p}=T(M_{\mf p})$ for all prime ideals, as localization preserves torsion.
+
+    Clearly (ii) implies (iii). 
+    
+    It remains to show that (iii) implies (i). By Proposition 2.3.1, it suffices to show that $(TM)_{\mf m}=0$ for all maximal ideals $\mf m\leq A$. This follows by the fact that localization (faithfully) preserves torsion, as $T(M_{\mf m})=0$ for all maximal ideals $\mf m\leq A$.
+\end{enumerate}
+\end{document}
